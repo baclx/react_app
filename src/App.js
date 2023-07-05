@@ -35,7 +35,8 @@ function App() {
           <header className="header">
             <div style={{ maxWidth: '1400px' }} className="grid wide">
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: "120px" }}>
-                <h1 style={{ margin: '0' }}>LOGO</h1>
+                {/*<h1 style={{ margin: '0' }}>LOGO</h1>*/}
+                <img src="/img/logo-removebg-preview.png" style={{ width: "160px" }} />
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-around", width: "300px" }}>
                   <Router>
                     <span><Link onClick={handleHiddenBody} className={className === 'span-header-primary' ? 'span-header' : 'span-header-primary'} to="/">Home</Link></span>
