@@ -9,6 +9,29 @@ import './style/base.css'
 import './style/grid.css'
 
 function App() {
+
+  const [slideIndex, setSlideIndex] = useState(0);
+
+  function plusDivs(n) {
+    let newIndex = slideIndex + n;
+    if (newIndex >= slides.length) {
+      newIndex = 0;
+    } else if (newIndex < 0) {
+      newIndex = slides.length - 1;
+    }
+    setSlideIndex(newIndex);
+  }
+
+  const slides = [
+    <div className="mySlides" style={{ backgroundColor: "#ccc", width: "100%", height: "450px" }}>
+      <h1 style={{ justifyContent: "center", alignItems: "center", height: "100%" }} className="d-flex">First Slide</h1>
+    </div>,
+    <div className="mySlides" style={{ backgroundColor: "#ccc", width: "100%", height: "450px" }}>
+      <h1 style={{ justifyContent: "center", alignItems: "center", height: "100%" }} className="d-flex">Second Slide</h1>
+    </div>,
+    // Add more slides here
+  ];
+
   const [isVisible, setIsVisible] = useState(false);
   const [isHiddenBody, setIsHiddenBody] = useState(true);
   const [className, setClassName] = useState('span-header');
@@ -50,8 +73,14 @@ function App() {
           </header>
 
         {isHiddenBody ? (<div>
-          <div style={{ backgroundColor: "#ccc", width: "100%", height: "450px" }}>
-            <h1 style={{ justifyContent: "center", alignItems: "center", height: "100%" }} className="d-flex">First Slide</h1>
+          <div style={{ maxWidth: "100%" }} className="w3-content w3-display-container">
+            {slides[slideIndex]}
+            <button className="w3-button w3-black w3-display-left" onClick={() => plusDivs(-1)}>
+              &#10094;
+            </button>
+            <button className="w3-button w3-black w3-display-right" onClick={() => plusDivs(1)}>
+              &#10095;
+            </button>
           </div>
 
           <div style={{ position: "relative", bottom: "35px" }}>
