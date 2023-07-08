@@ -3,6 +3,7 @@ import './App.css';
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 import MyTickets from './components/MyTickets';
+import DetailTickets from "./components/DetailTickets";
 
 import './style/main.css'
 import './style/base.css'
@@ -11,7 +12,6 @@ import './style/grid.css'
 function App() {
 
   const [slideIndex, setSlideIndex] = useState(0);
-
   function plusDivs(n) {
     let newIndex = slideIndex + n;
     if (newIndex >= slides.length) {
@@ -21,7 +21,6 @@ function App() {
     }
     setSlideIndex(newIndex);
   }
-
   const slides = [
     <div className="mySlides" style={{ backgroundColor: "#ccc", width: "100%", height: "450px" }}>
       <h1 style={{ justifyContent: "center", alignItems: "center", height: "100%" }} className="d-flex">First Slide</h1>
@@ -30,6 +29,29 @@ function App() {
       <h1 style={{ justifyContent: "center", alignItems: "center", height: "100%" }} className="d-flex">Second Slide</h1>
     </div>,
     // Add more slides here
+  ];
+
+  //slide login
+  const [slideIndexLogin, setSlideIndexLogin] = useState(0);
+  function plusDivsLogin(n) {
+    let newIndex = slideIndexLogin + n;
+    if (newIndex >= slidesLogin.length) {
+      newIndex = 0;
+    } else if (newIndex < 0) {
+      newIndex = slidesLogin.length - 1;
+    }
+    setSlideIndexLogin(newIndex);
+  }
+  const slidesLogin = [
+    <div className="mySlides" style={{ backgroundColor: "#ccc", width: "100%", height: "450px", borderBottomRightRadius: "8px", borderTopRightRadius: "8px" }}>
+      <h1 style={{ justifyContent: "center", alignItems: "center", height: "100%", margin: "0" }} className="d-flex">First Slide</h1>
+    </div>,
+    <div className="mySlides" style={{ backgroundColor: "#ccc", width: "100%", height: "450px", borderBottomRightRadius: "8px", borderTopRightRadius: "8px" }}>
+      <h1 style={{ justifyContent: "center", alignItems: "center", height: "100%", margin: "0" }} className="d-flex">Second Slide</h1>
+    </div>,
+    <div className="mySlides" style={{ backgroundColor: "#ccc", width: "100%", height: "450px", borderBottomRightRadius: "8px", borderTopRightRadius: "8px" }}>
+      <h1 style={{ justifyContent: "center", alignItems: "center", height: "100%", margin: "0" }} className="d-flex">Third Slide</h1>
+    </div>,
   ];
 
   const [isVisible, setIsVisible] = useState(false);
@@ -53,6 +75,28 @@ function App() {
     }
   };
 
+  //login
+  const [isLogin, setIsLogin] = useState(false);
+  const handleOpenLogin = () => {
+    setIsLogin(true);
+    setIsRegister(false);
+  };
+  const handleCloseLogin = () => {
+    setIsLogin(false);
+  };
+
+  //register
+  const [isRegister, setIsRegister] = useState(false);
+  const handleOpenRegister = () => {
+    setIsRegister(true);
+    setIsLogin(false)
+  };
+  const handleCloseRegister = () => {
+    setIsRegister(false);
+  };
+
+  const currentPath = window.location.pathname;
+
   return (
       <div className="app">
           <header className="header">
@@ -62,12 +106,24 @@ function App() {
                 <img src="/img/logo-removebg-preview.png" style={{ width: "160px" }} />
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-around", width: "300px" }}>
                   <Router>
-                    <span><Link onClick={handleHiddenBody} className={className === 'span-header-primary' ? 'span-header' : 'span-header-primary'} to="/">Home</Link></span>
-                    <span><Link onClick={handleHiddenBody} className={className === 'span-header-primary' ? 'span-header-primary' : 'span-header'} to="/myTickets">My Tickets</Link></span>
-                    <span><Link className="span-header" to="/profile">Profiles</Link></span>
+                      <span>
+                        {currentPath !== "/" ? (
+                            <Link onClick={handleHiddenBody} className={className === 'span-header-primary' ? 'span-header' : 'span-header-primary'} to="/">Home</Link>
+                        ) : (
+                            <span className="span-header-primary">Home</span>
+                        )}
+                      </span>
+                        <span>
+                        {currentPath !== "/myTickets" ? (
+                            <Link onClick={handleHiddenBody} className={className === 'span-header-primary' ? 'span-header-primary' : 'span-header'} to="/myTickets">My Tickets</Link>
+                        ) : (
+                            <span className="span-header-primary">My Tickets</span>
+                        )}
+                    </span>
+                        <span><Link className="span-header" to="/profile">Profiles</Link></span>
                   </Router>
                 </div>
-                <button style={{ minWidth: '90px', border: "1px solid #EE4D2D", color: "#EE4D2D", borderRadius: "30px" }} className="btn">Login</button>
+                <button onClick={handleOpenLogin} style={{ minWidth: '90px', border: "1px solid var(--primary-color)", color: "var(--primary-color)", borderRadius: "30px" }} className="btn">Login</button>
               </div>
             </div>
           </header>
@@ -91,9 +147,9 @@ function App() {
                     <div style={{ padding: "28px 28px 20px 28px" }}>
                       <div>Event name</div>
                       <div className="d-flex">
-                        <input className="w-100" style={{ padding: "8px", border: "1px solid", borderBottomLeftRadius: "5px", borderTopLeftRadius: "5px" }} type="text" placeholder="Enter keyword..."/>
+                        <input className="w-100" style={{ padding: "8px", border: "1px solid", borderBottomLeftRadius: "5px", borderTopLeftRadius: "5px", height: "34px" }} type="text" placeholder="Enter keyword..."/>
                         <button
-                            style={{ minWidth: '110px', color: "#000", backgroundColor: "#EE4D2D", borderBottomRightRadius: "5px", borderTopRightRadius: "5px" }}
+                            style={{ minWidth: '110px', color: "#000", backgroundColor: "var(--primary-color)", borderBottomRightRadius: "5px", borderTopRightRadius: "5px" }}
                             className="btn">Search</button>
                       </div>
 
@@ -119,7 +175,9 @@ function App() {
                             <div>Price</div>
                             <select className="input-event-name" name="" id="">
                               <option value="" selected>Choose...</option>
-                              <option value="">1</option>
+                              <option value="">All</option>
+                              <option value="">To 2M</option>
+                              <option value="">From 2M to 5M</option>
                             </select>
                           </div>
 
@@ -127,7 +185,10 @@ function App() {
                             <div>Status</div>
                             <select className="input-event-name" name="" id="">
                               <option value="" selected>Choose...</option>
-                              <option value="">1</option>
+                              <option value="">All</option>
+                              <option value="">Best Seller</option>
+                              <option value="">Selling</option>
+                              <option value="">Coming Soon</option>
                             </select>
                           </div>
                         </div>
@@ -257,36 +318,131 @@ function App() {
         </div>) : (<Router>
           <Routes>
             <Route path="/myTickets" element={<MyTickets />} />
+            <Route path="/detailTickets" element={<DetailTickets />} />
           </Routes>
         </Router>) }
 
         {/*pagination*/}
-        <ul className="pagination pagination--mt">
-          <li className="pagination-item">
-            <a href="" className="pagination-item__link">
-              <i className="pagination-item__icon fa-solid fa-angle-left"/>
-            </a>
-          </li>
+        {currentPath !== "/detailTickets" ? (
+            <ul className="pagination pagination--mt">
+              <li className="pagination-item">
+                <a href="" className="pagination-item__link">
+                  <i className="pagination-item__icon fa-solid fa-angle-left"/>
+                </a>
+              </li>
 
-          <li className="pagination-item pagination-item--active">
-            <a href="" className="pagination-item__link">1</a>
-          </li>
-          <li className="pagination-item">
-            <a href="" className="pagination-item__link">2</a>
-          </li>
-          <li className="pagination-item">
-            <a href="" className="pagination-item__link">...</a>
-          </li>
-          <li className="pagination-item">
-            <a href="" className="pagination-item__link">14</a>
-          </li>
+              <li className="pagination-item pagination-item--active">
+                <a href="" className="pagination-item__link">1</a>
+              </li>
+              <li className="pagination-item">
+                <a href="" className="pagination-item__link">2</a>
+              </li>
+              <li className="pagination-item">
+                <a href="" className="pagination-item__link">...</a>
+              </li>
+              <li className="pagination-item">
+                <a href="" className="pagination-item__link">14</a>
+              </li>
 
-          <li className="pagination-item">
-            <a href="" className="pagination-item__link">
-              <i className="pagination-item__icon fa-solid fa-angle-right"/>
-            </a>
-          </li>
-        </ul>
+              <li className="pagination-item">
+                <a href="" className="pagination-item__link">
+                  <i className="pagination-item__icon fa-solid fa-angle-right"/>
+                </a>
+              </li>
+            </ul>
+        ) : (<> </>)}
+
+        {isLogin && (<div>
+          <div className="modal-2">
+            <div style={{ width: "900px", padding: "0" }} className="modal-content-2">
+              <div className="d-flex align-item-center">
+                <div style={{ padding: "20px" }} className="l-6">
+                  <div>
+                    <div>
+                      <div>Email address</div>
+                      <input style={{ borderRadius: "5px", border: "1px solid", padding: "2px 4px" }} className="w-100" type="text"/>
+                      <div className="mt-5" style={{ fontSize: "10px", color: "#ccc" }}>More than 3 than than than than</div>
+                    </div>
+                    <div className="mt-10">
+                      <div>Password</div>
+                      <input style={{ borderRadius: "5px", border: "1px solid", padding: "2px 4px" }} className="w-100" type="text"/>
+                    </div>
+                    <div className="mt-10">
+                      <input type="checkbox"/> check me out
+                    </div>
+                  </div>
+                  <div className="mt-30 d-flex justify-content-between align-item-center">
+                    <button className="btn btn--primary" onClick={handleCloseLogin}>Sign in</button>
+                    <div className="d-flex" style={{ float: "right" }}>
+                      <div style={{ fontSize: "12px" }}>U have no account ?</div>
+                      <div onClick={handleOpenRegister} className="ml-10 cs-p" style={{ color: "var(--primary-color)", fontSize: "12px" }}>Sign up now!</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div style={{ padding: "0" }} className="l-6">
+                  <div style={{ maxWidth: "100%" }} className="w3-content w3-display-container">
+                    {slidesLogin[slideIndexLogin]}
+                    <button className="w3-button w3-black w3-display-left" onClick={() => plusDivsLogin(-1)}>
+                      &#10094;
+                    </button>
+                    <button className="w3-button w3-black w3-display-right" onClick={() => plusDivsLogin(1)}>
+                      &#10095;
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>)}
+
+        {isRegister && (<div>
+          <div className="modal-2">
+            <div style={{ width: "900px", padding: "0" }} className="modal-content-2">
+              <div className="d-flex align-item-center">
+                <div style={{ padding: "20px" }} className="l-6">
+                  <div>
+                    <div>
+                      <div>Name</div>
+                      <input style={{ borderRadius: "5px", border: "1px solid", padding: "2px 4px" }} className="w-100" type="text"/>
+                    </div>
+                    <div className="mt-10">
+                      <div>Email address</div>
+                      <input style={{ borderRadius: "5px", border: "1px solid", padding: "2px 4px" }} className="w-100" type="text"/>
+                    </div>
+                    <div className="mt-10">
+                      <div>Password</div>
+                      <input style={{ borderRadius: "5px", border: "1px solid", padding: "2px 4px" }} className="w-100" type="text"/>
+                    </div>
+                    <div className="mt-10">
+                      <div>Confirm Password</div>
+                      <input style={{ borderRadius: "5px", border: "1px solid", padding: "2px 4px" }} className="w-100" type="text"/>
+                    </div>
+                  </div>
+                  <div className="mt-30 d-flex justify-content-between align-item-center">
+                    <button className="btn btn--primary" onClick={handleCloseRegister}>Sign up</button>
+                    <div className="d-flex" style={{ float: "right" }}>
+                      <div style={{ fontSize: "12px" }}>U have an account ?</div>
+                      <div onClick={handleOpenLogin} className="ml-10 cs-p" style={{ color: "var(--primary-color)", fontSize: "12px" }}>Sign in now!</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div style={{ padding: "0" }} className="l-6">
+                  <div style={{ maxWidth: "100%" }} className="w3-content w3-display-container">
+                    {slidesLogin[slideIndexLogin]}
+                    <button className="w3-button w3-black w3-display-left" onClick={() => plusDivsLogin(-1)}>
+                      &#10094;
+                    </button>
+                    <button className="w3-button w3-black w3-display-right" onClick={() => plusDivsLogin(1)}>
+                      &#10095;
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>)}
 
         {/*footer*/}
         <div style={{ backgroundColor: "#ccc", width: "100%", height: "250px" }}>
