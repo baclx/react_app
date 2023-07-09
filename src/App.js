@@ -326,26 +326,26 @@ function App() {
         {currentPath !== "/detailTickets" ? (
             <ul className="pagination pagination--mt">
               <li className="pagination-item">
-                <a href="" className="pagination-item__link">
+                <a href="##" className="pagination-item__link">
                   <i className="pagination-item__icon fa-solid fa-angle-left"/>
                 </a>
               </li>
 
               <li className="pagination-item pagination-item--active">
-                <a href="" className="pagination-item__link">1</a>
+                <a href="##" className="pagination-item__link">1</a>
               </li>
               <li className="pagination-item">
-                <a href="" className="pagination-item__link">2</a>
+                <a href="##" className="pagination-item__link">2</a>
               </li>
               <li className="pagination-item">
-                <a href="" className="pagination-item__link">...</a>
+                <a href="##" className="pagination-item__link">...</a>
               </li>
               <li className="pagination-item">
-                <a href="" className="pagination-item__link">14</a>
+                <a href="##" className="pagination-item__link">14</a>
               </li>
 
               <li className="pagination-item">
-                <a href="" className="pagination-item__link">
+                <a href="##" className="pagination-item__link">
                   <i className="pagination-item__icon fa-solid fa-angle-right"/>
                 </a>
               </li>
@@ -381,15 +381,16 @@ function App() {
                 </div>
 
                 <div style={{ padding: "0" }} className="l-6">
-                  <div style={{ maxWidth: "100%" }} className="w3-content w3-display-container">
-                    {slidesLogin[slideIndexLogin]}
-                    <button className="w3-button w3-black w3-display-left" onClick={() => plusDivsLogin(-1)}>
-                      &#10094;
-                    </button>
-                    <button className="w3-button w3-black w3-display-right" onClick={() => plusDivsLogin(1)}>
-                      &#10095;
-                    </button>
-                  </div>
+                  {/*<div style={{ maxWidth: "100%" }} className="w3-content w3-display-container">*/}
+                  {/*  {slidesLogin[slideIndexLogin]}*/}
+                  {/*  <button className="w3-button w3-black w3-display-left" onClick={() => plusDivsLogin(-1)}>*/}
+                  {/*    &#10094;*/}
+                  {/*  </button>*/}
+                  {/*  <button className="w3-button w3-black w3-display-right" onClick={() => plusDivsLogin(1)}>*/}
+                  {/*    &#10095;*/}
+                  {/*  </button>*/}
+                  {/*</div>*/}
+                  <img src="/img/logo-removebg-preview.png" style={{ width: "100%" }} />
                 </div>
               </div>
             </div>
@@ -429,15 +430,16 @@ function App() {
                 </div>
 
                 <div style={{ padding: "0" }} className="l-6">
-                  <div style={{ maxWidth: "100%" }} className="w3-content w3-display-container">
-                    {slidesLogin[slideIndexLogin]}
-                    <button className="w3-button w3-black w3-display-left" onClick={() => plusDivsLogin(-1)}>
-                      &#10094;
-                    </button>
-                    <button className="w3-button w3-black w3-display-right" onClick={() => plusDivsLogin(1)}>
-                      &#10095;
-                    </button>
-                  </div>
+                  {/*<div style={{ maxWidth: "100%" }} className="w3-content w3-display-container">*/}
+                  {/*  {slidesLogin[slideIndexLogin]}*/}
+                  {/*  <button className="w3-button w3-black w3-display-left" onClick={() => plusDivsLogin(-1)}>*/}
+                  {/*    &#10094;*/}
+                  {/*  </button>*/}
+                  {/*  <button className="w3-button w3-black w3-display-right" onClick={() => plusDivsLogin(1)}>*/}
+                  {/*    &#10095;*/}
+                  {/*  </button>*/}
+                  {/*</div>*/}
+                  <img src="/img/logo-removebg-preview.png" style={{ width: "100%" }} />
                 </div>
               </div>
             </div>
