@@ -56,6 +56,7 @@ function App() {
 
   const [isVisible, setIsVisible] = useState(false);
   const [isHiddenBody, setIsHiddenBody] = useState(true);
+  const [isHiddenBodyDetailTicket, setIsHiddenBodyDetailTicket] = useState(false);
   const [className, setClassName] = useState('span-header');
 
   const handleClick = () => {
@@ -64,8 +65,13 @@ function App() {
 
   const handleHiddenBody = () => {
     setIsHiddenBody(!isHiddenBody);
+    setIsHiddenBodyDetailTicket(false)
     handleChangeClassName()
   };
+
+  const handleHiddenBodyDetailTicket = () => {
+    setIsHiddenBodyDetailTicket(true)
+  }
 
   const handleChangeClassName = () => {
     if (className === 'span-header') {
@@ -99,13 +105,13 @@ function App() {
 
   return (
       <div className="app">
-          <header className="header">
-            <div style={{ maxWidth: '1400px' }} className="grid wide">
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: "120px" }}>
-                {/*<h1 style={{ margin: '0' }}>LOGO</h1>*/}
-                <img src="/img/logo-removebg-preview.png" style={{ width: "160px" }} />
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-around", width: "300px" }}>
-                  <Router>
+        <header className="header">
+          <div style={{ maxWidth: '1400px' }} className="grid wide">
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: "120px" }}>
+              {/*<h1 style={{ margin: '0' }}>LOGO</h1>*/}
+              <img src="/img/logo-removebg-preview.png" style={{ width: "160px" }} />
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-around", width: "300px" }}>
+                <Router>
                       <span>
                         {currentPath !== "/" ? (
                             <Link onClick={handleHiddenBody} className={className === 'span-header-primary' ? 'span-header' : 'span-header-primary'} to="/">Home</Link>
@@ -113,199 +119,224 @@ function App() {
                             <span className="span-header-primary">Home</span>
                         )}
                       </span>
-                        <span>
+                  <span>
                         {currentPath !== "/myTickets" ? (
                             <Link onClick={handleHiddenBody} className={className === 'span-header-primary' ? 'span-header-primary' : 'span-header'} to="/myTickets">My Tickets</Link>
                         ) : (
                             <span className="span-header-primary">My Tickets</span>
                         )}
                     </span>
-                        <span><Link className="span-header" to="/profile">Profiles</Link></span>
-                  </Router>
-                </div>
-                <button onClick={handleOpenLogin} style={{ minWidth: '90px', border: "1px solid var(--primary-color)", color: "var(--primary-color)", borderRadius: "30px" }} className="btn">Login</button>
+                  <span><Link className="span-header" to="/profile">Profiles</Link></span>
+                </Router>
               </div>
+              <button onClick={handleOpenLogin} style={{ minWidth: '90px', border: "1px solid var(--primary-color)", color: "var(--primary-color)", borderRadius: "30px" }} className="btn">Login</button>
             </div>
-          </header>
-
-        {isHiddenBody ? (<div>
-          <div style={{ maxWidth: "100%" }} className="w3-content w3-display-container">
-            {slides[slideIndex]}
-            <button className="w3-button w3-black w3-display-left" onClick={() => plusDivs(-1)}>
-              &#10094;
-            </button>
-            <button className="w3-button w3-black w3-display-right" onClick={() => plusDivs(1)}>
-              &#10095;
-            </button>
           </div>
+        </header>
+        {!isHiddenBodyDetailTicket ? (<div>
+          {isHiddenBody ? (<div>
+            <div style={{ maxWidth: "100%" }} className="w3-content w3-display-container">
+              {slides[slideIndex]}
+              <button className="w3-button w3-black w3-display-left" onClick={() => plusDivs(-1)}>
+                &#10094;
+              </button>
+              <button className="w3-button w3-black w3-display-right" onClick={() => plusDivs(1)}>
+                &#10095;
+              </button>
+            </div>
 
-          <div style={{ position: "relative", bottom: "35px" }}>
-            <div className="grid wide">
-              <div className="row sm-gutters">
-                <div className="l-7">
-                  <div style={{ width: "100%", backgroundColor: "#f5f2f2", borderRadius: "5px" }}>
-                    <div style={{ padding: "28px 28px 20px 28px" }}>
-                      <div>Event name</div>
-                      <div className="d-flex">
-                        <input className="w-100" style={{ padding: "8px", border: "1px solid", borderBottomLeftRadius: "5px", borderTopLeftRadius: "5px", height: "34px" }} type="text" placeholder="Enter keyword..."/>
-                        <button
-                            style={{ minWidth: '110px', color: "#000", backgroundColor: "var(--primary-color)", borderBottomRightRadius: "5px", borderTopRightRadius: "5px" }}
-                            className="btn">Search</button>
-                      </div>
-
-                      {isVisible && (<div className="mt-20">
+            <div style={{ position: "relative", bottom: "35px" }}>
+              <div className="grid wide">
+                <div className="row sm-gutters">
+                  <div className="l-7">
+                    <div style={{ width: "100%", backgroundColor: "#f5f2f2", borderRadius: "5px" }}>
+                      <div style={{ padding: "28px 28px 20px 28px" }}>
+                        <div>Event name</div>
                         <div className="d-flex">
-                          <div className="w-50">
-                            <div>Category</div>
-                            <select className="input-event-name" name="" id="">
-                              <option value="" selected>Choose...</option>
-                              <option value="">1</option>
-                            </select>
+                          <input className="w-100" style={{ padding: "8px", border: "1px solid", borderBottomLeftRadius: "5px", borderTopLeftRadius: "5px", height: "34px" }} type="text" placeholder="Enter keyword..."/>
+                          <button
+                              style={{ minWidth: '110px', color: "#000", backgroundColor: "var(--primary-color)", borderBottomRightRadius: "5px", borderTopRightRadius: "5px" }}
+                              className="btn">Search</button>
+                        </div>
+
+                        {isVisible && (<div className="mt-20">
+                          <div className="d-flex">
+                            <div className="w-50">
+                              <div>Category</div>
+                              <select className="input-event-name" name="" id="">
+                                <option value="" selected>Choose...</option>
+                                <option value="">1</option>
+                              </select>
+                            </div>
+
+                            <div className="w-50">
+                              <div>Date</div>
+                              <input style={{ width: "66%", padding: "7px", borderRadius: "3px", border: "1px solid" }} type="text"/>
+                            </div>
                           </div>
 
-                          <div className="w-50">
-                            <div>Date</div>
-                            <input style={{ width: "66%", padding: "7px", borderRadius: "3px", border: "1px solid" }} type="text"/>
+                          {/*2*/}
+                          <div className="d-flex mt-20">
+                            <div className="w-50">
+                              <div>Price</div>
+                              <select className="input-event-name" name="" id="">
+                                <option value="" selected>Choose...</option>
+                                <option value="">All</option>
+                                <option value="">To 2M</option>
+                                <option value="">From 2M to 5M</option>
+                              </select>
+                            </div>
+
+                            <div className="w-50">
+                              <div>Status</div>
+                              <select className="input-event-name" name="" id="">
+                                <option value="" selected>Choose...</option>
+                                <option value="">All</option>
+                                <option value="">Best Seller</option>
+                                <option value="">Selling</option>
+                                <option value="">Coming Soon</option>
+                              </select>
+                            </div>
                           </div>
-                        </div>
+                        </div>)}
 
-                        {/*2*/}
-                        <div className="d-flex mt-20">
-                          <div className="w-50">
-                            <div>Price</div>
-                            <select className="input-event-name" name="" id="">
-                              <option value="" selected>Choose...</option>
-                              <option value="">All</option>
-                              <option value="">To 2M</option>
-                              <option value="">From 2M to 5M</option>
-                            </select>
-                          </div>
+                        <div style={{ textAlign: "center", marginTop: "10px" }}>
+                          <i onClick={handleClick} className="fa-solid fa-arrow-down cs-p"/>
+                        </div>
+                      </div>
+                    </div>
 
-                          <div className="w-50">
-                            <div>Status</div>
-                            <select className="input-event-name" name="" id="">
-                              <option value="" selected>Choose...</option>
-                              <option value="">All</option>
-                              <option value="">Best Seller</option>
-                              <option value="">Selling</option>
-                              <option value="">Coming Soon</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>)}
-
-                      <div style={{ textAlign: "center", marginTop: "10px" }}>
-                        <i onClick={handleClick} className="fa-solid fa-arrow-down cs-p"/>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/*card*/}
-                  <div className="mt-30 row sm-gutters">
-                    <div className="l-6 pd-r-l-5">
-                      <div style={{ border: "1px solid" }}>
-                        <div style={{ backgroundColor: "#ccc", width: "100%", height: "120px" }}>Image cap</div>
-                        <div style={{ padding: "0 10px 10px 10px" }}>
-                          <h3>Card title</h3>
-                          <span>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer </span>
-                          <div className="mt-5">Last updated 3 mind ago</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="l-6 pd-r-l-5">
-                      <div style={{ border: "1px solid" }}>
-                        <div style={{ backgroundColor: "#ccc", width: "100%", height: "120px" }}>Image cap</div>
-                        <div style={{ padding: "0 10px 10px 10px" }}>
-                          <h3>Card title</h3>
-                          <span>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer </span>
-                          <div className="mt-5">Last updated 3 mind ago</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/*card-2*/}
-                  <div className="mt-30 row sm-gutters">
-                    <div className="l-6 pd-r-l-5">
-                      <div style={{ border: "1px solid" }}>
-                        <div style={{ backgroundColor: "#ccc", width: "100%", height: "120px" }}>Image cap</div>
-                        <div style={{ padding: "0 10px 10px 10px" }}>
-                          <h3>Card title</h3>
-                          <span>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer </span>
-                          <div className="mt-5">Last updated 3 mind ago</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="l-6 pd-r-l-5">
-                      <div style={{ border: "1px solid" }}>
-                        <div style={{ backgroundColor: "#ccc", width: "100%", height: "120px" }}>Image cap</div>
-                        <div style={{ padding: "0 10px 10px 10px" }}>
-                          <h3>Card title</h3>
-                          <span>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer </span>
-                          <div className="mt-5">Last updated 3 mind ago</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/*card-3*/}
-                  <div className="mt-30 row sm-gutters">
-                    <div className="l-6 pd-r-l-5">
-                      <div style={{ border: "1px solid" }}>
-                        <div style={{ backgroundColor: "#ccc", width: "100%", height: "120px" }}>Image cap</div>
-                        <div style={{ padding: "0 10px 10px 10px" }}>
-                          <h3>Card title</h3>
-                          <span>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer </span>
-                          <div className="mt-5">Last updated 3 mind ago</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="l-6 pd-r-l-5">
-                      <div style={{ border: "1px solid" }}>
-                        <div style={{ backgroundColor: "#ccc", width: "100%", height: "120px" }}>Image cap</div>
-                        <div style={{ padding: "0 10px 10px 10px" }}>
-                          <h3>Card title</h3>
-                          <span>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer </span>
-                          <div className="mt-5">Last updated 3 mind ago</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="l-1"/>
-                <div className="l-4">
-                  <div style={{ height: "auto", border: "1px solid" }}>
-                    <div className="coming-soon">Coming Soon</div>
-                    <div style={{ padding: "10px"}}>
-                      {/*card1*/}
-                      <div className="l-12 pd-r-l-5">
+                    {/*card*/}
+                    <div className="mt-30 row sm-gutters">
+                      <div className="l-6 pd-r-l-5">
                         <div style={{ border: "1px solid" }}>
                           <div style={{ backgroundColor: "#ccc", width: "100%", height: "120px" }}>Image cap</div>
                           <div style={{ padding: "0 10px 10px 10px" }}>
-                            <h4>Event name</h4>
-                            <div className="mt-5">dd/MM/YYYY</div>
+                            <Router>
+                              <Link onClick={handleHiddenBodyDetailTicket} style={{ textDecoration: "none" }} to="/detailTickets">
+                                <h2 className="cs-p">Card title</h2>
+                              </Link>
+                            </Router>
+                            <span>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer </span>
+                            <div className="mt-5">Last updated 3 mind ago</div>
                           </div>
                         </div>
                       </div>
-
-                      {/*card2*/}
-                      <div className="l-12 pd-r-l-5 mt-20">
+                      <div className="l-6 pd-r-l-5">
                         <div style={{ border: "1px solid" }}>
                           <div style={{ backgroundColor: "#ccc", width: "100%", height: "120px" }}>Image cap</div>
                           <div style={{ padding: "0 10px 10px 10px" }}>
-                            <h4>Event name</h4>
-                            <div className="mt-5">dd/MM/YYYY</div>
+                            <Router>
+                              <Link onClick={handleHiddenBodyDetailTicket} style={{ textDecoration: "none" }} to="/detailTickets">
+                                <h2 className="cs-p">Card title</h2>
+                              </Link>
+                            </Router>
+                            <span>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer </span>
+                            <div className="mt-5">Last updated 3 mind ago</div>
                           </div>
                         </div>
                       </div>
+                    </div>
 
-                      {/*card3*/}
-                      <div className="l-12 pd-r-l-5 mt-20">
+                    {/*card-2*/}
+                    <div className="mt-30 row sm-gutters">
+                      <div className="l-6 pd-r-l-5">
                         <div style={{ border: "1px solid" }}>
                           <div style={{ backgroundColor: "#ccc", width: "100%", height: "120px" }}>Image cap</div>
                           <div style={{ padding: "0 10px 10px 10px" }}>
-                            <h4>Event name</h4>
-                            <div className="mt-5">dd/MM/YYYY</div>
+                            <Router>
+                              <Link onClick={handleHiddenBodyDetailTicket} style={{ textDecoration: "none" }} to="/detailTickets">
+                                <h2 className="cs-p">Card title</h2>
+                              </Link>
+                            </Router>
+                            <span>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer </span>
+                            <div className="mt-5">Last updated 3 mind ago</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="l-6 pd-r-l-5">
+                        <div style={{ border: "1px solid" }}>
+                          <div style={{ backgroundColor: "#ccc", width: "100%", height: "120px" }}>Image cap</div>
+                          <div style={{ padding: "0 10px 10px 10px" }}>
+                            <Router>
+                              <Link onClick={handleHiddenBodyDetailTicket} style={{ textDecoration: "none" }} to="/detailTickets">
+                                <h2 className="cs-p">Card title</h2>
+                              </Link>
+                            </Router>
+                            <span>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer </span>
+                            <div className="mt-5">Last updated 3 mind ago</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/*card-3*/}
+                    <div className="mt-30 row sm-gutters">
+                      <div className="l-6 pd-r-l-5">
+                        <div style={{ border: "1px solid" }}>
+                          <div style={{ backgroundColor: "#ccc", width: "100%", height: "120px" }}>Image cap</div>
+                          <div style={{ padding: "0 10px 10px 10px" }}>
+                            <Router>
+                              <Link onClick={handleHiddenBodyDetailTicket} style={{ textDecoration: "none" }} to="/detailTickets">
+                                <h2 className="cs-p">Card title</h2>
+                              </Link>
+                            </Router>
+                            <span>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer </span>
+                            <div className="mt-5">Last updated 3 mind ago</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="l-6 pd-r-l-5">
+                        <div style={{ border: "1px solid" }}>
+                          <div style={{ backgroundColor: "#ccc", width: "100%", height: "120px" }}>Image cap</div>
+                          <div style={{ padding: "0 10px 10px 10px" }}>
+                            <Router>
+                              <Link onClick={handleHiddenBodyDetailTicket} style={{ textDecoration: "none" }} to="/detailTickets">
+                                <h2 className="cs-p">Card title</h2>
+                              </Link>
+                            </Router>
+                            <span>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer </span>
+                            <div className="mt-5">Last updated 3 mind ago</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="l-1"/>
+                  <div className="l-4">
+                    <div style={{ height: "auto", border: "1px solid" }}>
+                      <div className="coming-soon">Coming Soon</div>
+                      <div style={{ padding: "10px"}}>
+                        {/*card1*/}
+                        <div className="l-12 pd-r-l-5">
+                          <div style={{ border: "1px solid" }}>
+                            <div style={{ backgroundColor: "#ccc", width: "100%", height: "120px" }}>Image cap</div>
+                            <div style={{ padding: "0 10px 10px 10px" }}>
+                              <h4>Event name</h4>
+                              <div className="mt-5">dd/MM/YYYY</div>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/*card2*/}
+                        <div className="l-12 pd-r-l-5 mt-20">
+                          <div style={{ border: "1px solid" }}>
+                            <div style={{ backgroundColor: "#ccc", width: "100%", height: "120px" }}>Image cap</div>
+                            <div style={{ padding: "0 10px 10px 10px" }}>
+                              <h4>Event name</h4>
+                              <div className="mt-5">dd/MM/YYYY</div>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/*card3*/}
+                        <div className="l-12 pd-r-l-5 mt-20">
+                          <div style={{ border: "1px solid" }}>
+                            <div style={{ backgroundColor: "#ccc", width: "100%", height: "120px" }}>Image cap</div>
+                            <div style={{ padding: "0 10px 10px 10px" }}>
+                              <h4>Event name</h4>
+                              <div className="mt-5">dd/MM/YYYY</div>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -314,16 +345,20 @@ function App() {
                 </div>
               </div>
             </div>
-          </div>
+          </div>) : (<Router>
+            <Routes>
+              <Route path="/myTickets" element={<MyTickets />} />
+              <Route path="/detailTickets" element={<DetailTickets />} />
+            </Routes>
+          </Router>) }
         </div>) : (<Router>
           <Routes>
-            <Route path="/myTickets" element={<MyTickets />} />
             <Route path="/detailTickets" element={<DetailTickets />} />
           </Routes>
-        </Router>) }
+        </Router>)}
 
         {/*pagination*/}
-        {currentPath !== "/detailTickets" ? (
+        {/*{currentPath !== "/detailTickets" ? (*/}
             <ul className="pagination pagination--mt">
               <li className="pagination-item">
                 <a href="##" className="pagination-item__link">
@@ -350,7 +385,7 @@ function App() {
                 </a>
               </li>
             </ul>
-        ) : (<> </>)}
+        {/*) : (<> </>)}*/}
 
         {isLogin && (<div>
           <div className="modal-2">
