@@ -1,5 +1,7 @@
 import {Link} from "react-router-dom";
 import {useState} from "react";
+import ModalLogin from "../../../auth/login";
+import ModalRegister from "../../../auth/signup";
 
 function Header() {
     //login
@@ -56,79 +58,63 @@ function Header() {
             </header>
 
             {isLogin && (<div>
-                <div className="modal-2">
-                    <div style={{ width: "900px", padding: "0" }} className="modal-content-2">
-                        <div className="d-flex align-item-center">
-                            <div style={{ padding: "20px" }} className="l-6">
-                                <div>
-                                    <div>
-                                        <div>Email address</div>
-                                        <input style={{ borderRadius: "5px", border: "1px solid", padding: "2px 4px" }} className="w-100" type="text"/>
-                                        <div className="mt-5" style={{ fontSize: "10px", color: "#ccc" }}>More than 3 than than than than</div>
-                                    </div>
-                                    <div className="mt-10">
-                                        <div>Password</div>
-                                        <input style={{ borderRadius: "5px", border: "1px solid", padding: "2px 4px" }} className="w-100" type="text"/>
-                                    </div>
-                                    <div className="mt-10">
-                                        <input type="checkbox"/> check me out
-                                    </div>
-                                </div>
-                                <div className="mt-30 d-flex justify-content-between align-item-center">
-                                    <button className="btn btn--primary" onClick={handleCloseLogin}>Sign in</button>
-                                    <div className="d-flex" style={{ float: "right" }}>
-                                        <div style={{ fontSize: "12px" }}>U have no account ?</div>
-                                        <div onClick={handleOpenRegister} className="ml-10 cs-p" style={{ color: "var(--primary-color)", fontSize: "12px" }}>Sign up now!</div>
-                                    </div>
-                                </div>
+                <ModalLogin isOpen={isLogin}>
+                    <div style={{ padding: "20px" }} className="l-6">
+                        <div>
+                            <div>
+                                <div>Email address</div>
+                                <input style={{ borderRadius: "5px", border: "1px solid", padding: "2px 4px" }} className="w-100" type="text"/>
+                                <div className="mt-5" style={{ fontSize: "10px", color: "#ccc" }}>More than 3 than than than than</div>
                             </div>
-
-                            <div style={{ padding: "0" }} className="l-6">
-                                <img src="/img/logo-removebg-preview.png" style={{ width: "100%" }} />
+                            <div className="mt-10">
+                                <div>Password</div>
+                                <input style={{ borderRadius: "5px", border: "1px solid", padding: "2px 4px" }} className="w-100" type="text"/>
+                            </div>
+                            <div className="mt-10">
+                                <input type="checkbox"/> check me out
+                            </div>
+                        </div>
+                        <div className="mt-30 d-flex justify-content-between align-item-center">
+                            <button className="btn btn--primary" onClick={handleCloseLogin}>Sign in</button>
+                            <div className="d-flex" style={{ float: "right" }}>
+                                <div style={{ fontSize: "12px" }}>U have no account ?</div>
+                                <div onClick={handleOpenRegister} className="ml-10 cs-p" style={{ color: "var(--primary-color)", fontSize: "12px" }}>Sign up now!</div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </ModalLogin>
             </div>)}
 
             {isRegister && (<div>
-                <div className="modal-2">
-                    <div style={{ width: "900px", padding: "0" }} className="modal-content-2">
-                        <div className="d-flex align-item-center">
-                            <div style={{ padding: "20px" }} className="l-6">
-                                <div>
-                                    <div>
-                                        <div>Name</div>
-                                        <input style={{ borderRadius: "5px", border: "1px solid", padding: "2px 4px" }} className="w-100" type="text"/>
-                                    </div>
-                                    <div className="mt-10">
-                                        <div>Email address</div>
-                                        <input style={{ borderRadius: "5px", border: "1px solid", padding: "2px 4px" }} className="w-100" type="text"/>
-                                    </div>
-                                    <div className="mt-10">
-                                        <div>Password</div>
-                                        <input style={{ borderRadius: "5px", border: "1px solid", padding: "2px 4px" }} className="w-100" type="text"/>
-                                    </div>
-                                    <div className="mt-10">
-                                        <div>Confirm Password</div>
-                                        <input style={{ borderRadius: "5px", border: "1px solid", padding: "2px 4px" }} className="w-100" type="text"/>
-                                    </div>
-                                </div>
-                                <div className="mt-30 d-flex justify-content-between align-item-center">
-                                    <button className="btn btn--primary" onClick={handleCloseRegister}>Sign up</button>
-                                    <div className="d-flex" style={{ float: "right" }}>
-                                        <div style={{ fontSize: "12px" }}>U have an account ?</div>
-                                        <div onClick={handleOpenLogin} className="ml-10 cs-p" style={{ color: "var(--primary-color)", fontSize: "12px" }}>Sign in now!</div>
-                                    </div>
-                                </div>
+                <ModalRegister isOpen={isRegister}>
+                    <div style={{ padding: "20px" }} className="l-6">
+                        <div>
+                            <div>
+                                <div>Name</div>
+                                <input style={{ borderRadius: "5px", border: "1px solid", padding: "2px 4px" }} className="w-100" type="text"/>
                             </div>
-
-                            <div style={{ padding: "0" }} className="l-6">
-                                <img src="/img/logo-removebg-preview.png" style={{ width: "100%" }} />
+                            <div className="mt-10">
+                                <div>Email address</div>
+                                <input style={{ borderRadius: "5px", border: "1px solid", padding: "2px 4px" }} className="w-100" type="text"/>
+                            </div>
+                            <div className="mt-10">
+                                <div>Password</div>
+                                <input style={{ borderRadius: "5px", border: "1px solid", padding: "2px 4px" }} className="w-100" type="text"/>
+                            </div>
+                            <div className="mt-10">
+                                <div>Confirm Password</div>
+                                <input style={{ borderRadius: "5px", border: "1px solid", padding: "2px 4px" }} className="w-100" type="text"/>
+                            </div>
+                        </div>
+                        <div className="mt-30 d-flex justify-content-between align-item-center">
+                            <button className="btn btn--primary" onClick={handleCloseRegister}>Sign up</button>
+                            <div className="d-flex" style={{ float: "right" }}>
+                                <div style={{ fontSize: "12px" }}>U have an account ?</div>
+                                <div onClick={handleOpenLogin} className="ml-10 cs-p" style={{ color: "var(--primary-color)", fontSize: "12px" }}>Sign in now!</div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </ModalRegister>
             </div>)}
         </div>
     );
